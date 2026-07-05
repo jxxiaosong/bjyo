@@ -58,7 +58,6 @@ a:focus {
 .ibox,
 .panel,
 .search-collapse,
-.select-list,
 .select-table,
 .fixed-table-toolbar,
 .timeline-item .content,
@@ -109,6 +108,15 @@ a:focus {
 .select-list {
     margin-bottom: 14px;
     padding: 14px 16px 6px;
+}
+
+.search-collapse .select-list {
+    margin-bottom: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .select-list ul {
