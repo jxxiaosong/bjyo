@@ -10,68 +10,66 @@
     <link href="../static/css/style.min.css" th:href="@{/css/style.min.css}" rel="stylesheet"/>
     <link href="../static/css/login.min.css" th:href="@{/css/login.min.css}" rel="stylesheet"/>
     <link href="../static/bjyo/css/bjyo-ui.css" th:href="@{/bjyo/css/bjyo-ui.css?v=4.8.3}" rel="stylesheet"/>
-    <!-- 360浏览器急速模式 -->
+    <link href="../static/bjyo/css/bjyo-auth.css" th:href="@{/bjyo/css/bjyo-auth.css?v=4.8.3}" rel="stylesheet"/>
     <meta name="renderer" content="webkit">
-    <!-- 避免IE使用兼容模式 -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="../static/favicon.ico" th:href="@{favicon.ico}"/>
-    <style type="text/css">label.error { position:inherit;  }</style>
+    <style type="text/css">label.error { position:inherit; }</style>
     <script>
         if(window.top!==window.self){alert('未登录或登录超时。请重新登录');window.top.location=window.location};
     </script>
 </head>
 <body class="signin">
-    <div class="signinpanel">
-        <div class="row">
-            <div class="col-sm-7">
-                <div class="signin-info">
-                    <div class="logopanel m-b">
-                        <h1><img alt="[ BJYO ]" src="../static/bjyo.png" th:src="@{/bjyo.png}"></h1>
+    <main class="bjyo-auth-shell">
+        <section class="bjyo-auth-panel">
+            <div class="bjyo-auth-grid">
+                <div class="bjyo-auth-brand">
+                    <div class="bjyo-auth-mark">
+                        <img alt="[ BJYO ]" src="../static/bjyo.png" th:src="@{/bjyo.png}">
+                        <span>运营中台 / 权限 / 代码生成</span>
                     </div>
-                    <div class="m-b"></div>
-                    <h4>欢迎使用 <strong>BJYO 后台管理系统</strong></h4>
-                    <ul class="m-b">
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> SpringBoot</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Mybatis</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Shiro</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Thymeleaf</li>
-                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Bootstrap</li>
+                    <h1>BJYO 管理系统</h1>
+                    <p>面向企业内部运营、系统管理和快速业务搭建的后台脚手架。保留成熟的权限、日志、任务和代码生成能力，用更清晰的界面承载日常工作。</p>
+                    <ul class="bjyo-auth-points">
+                        <li><i class="fa fa-shield"></i> Shiro 权限体系</li>
+                        <li><i class="fa fa-database"></i> MyBatis 数据访问</li>
+                        <li><i class="fa fa-clock-o"></i> Quartz 定时任务</li>
+                        <li><i class="fa fa-code"></i> 代码生成工具</li>
                     </ul>
-                    <strong th:if="${isAllowRegister}">还没有账号？ <a th:href="@{/register}">立即注册&raquo;</a></strong>
+                    <div class="bjyo-auth-footer">Copyright © 2018-2026 bjyo.vip All Rights Reserved.</div>
+                </div>
+
+                <div class="bjyo-auth-card">
+                    <form id="signupForm" autocomplete="off">
+                        <h2>登录工作台</h2>
+                        <p class="auth-subtitle">高效、稳定、可扩展</p>
+                        <input type="text" name="username" class="form-control uname" placeholder="用户名" value="admin"/>
+                        <input type="password" name="password" class="form-control pword" placeholder="密码" value="admin123"/>
+                        <div class="row captcha-row" th:if="${captchaEnabled==true}">
+                            <div class="col-xs-6">
+                                <input type="text" name="validateCode" class="form-control code" placeholder="验证码" maxlength="5"/>
+                            </div>
+                            <div class="col-xs-6">
+                                <a href="javascript:void(0);" title="点击更换验证码">
+                                    <img th:src="@{/captcha/captchaImage(type=${captchaType})}" class="imgcode"/>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="checkbox-custom" th:if="${isRemembered}" th:classappend="${captchaEnabled==false} ? 'm-t'">
+                            <input type="checkbox" id="rememberme" name="rememberme"> <label for="rememberme">记住我</label>
+                        </div>
+                        <button class="btn btn-success btn-block" id="btnSubmit" data-loading="正在验证登录，请稍候...">登录</button>
+                        <div class="bjyo-auth-alt" th:if="${isAllowRegister}">
+                            <span>还没有账号？</span>
+                            <a th:href="@{/register}">立即注册</a>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="col-sm-5">
-                <form id="signupForm" autocomplete="off">
-                    <h4 class="no-margins">登录：</h4>
-                    <p class="m-t-md">高效、稳定、可扩展</p>
-                    <input type="text"     name="username" class="form-control uname"     placeholder="用户名" value="admin"    />
-                    <input type="password" name="password" class="form-control pword"     placeholder="密码"   value="admin123" />
-					<div class="row m-t" th:if="${captchaEnabled==true}">
-						<div class="col-xs-6">
-						    <input type="text" name="validateCode" class="form-control code" placeholder="验证码" maxlength="5" />
-						</div>
-						<div class="col-xs-6">
-							<a href="javascript:void(0);" title="点击更换验证码">
-								<img th:src="@{/captcha/captchaImage(type=${captchaType})}" class="imgcode" width="85%"/>
-							</a>
-						</div>
-					</div>
-                    <div class="checkbox-custom" th:if="${isRemembered}" th:classappend="${captchaEnabled==false} ? 'm-t'">
-				        <input type="checkbox" id="rememberme" name="rememberme"> <label for="rememberme">记住我</label>
-				    </div>
-                    <button class="btn btn-success btn-block" id="btnSubmit" data-loading="正在验证登录，请稍候...">登录</button>
-                </form>
-            </div>
-        </div>
-        <div class="signup-footer">
-            <div class="pull-left">
-                Copyright © 2018-2026 bjyo.vip All Rights Reserved. <br>
-            </div>
-        </div>
-    </div>
+        </section>
+    </main>
 <script th:inline="javascript"> var ctx = [[@{/}]]; var captchaType = [[${captchaType}]]; var captchaEnabled = [[${captchaEnabled}]];</script>
 <!--[if lte IE 8]><script>window.location.href=ctx+'html/ie.html';</script><![endif]-->
-<!-- 全局js -->
 <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
 <script src="../static/ajax/libs/validate/jquery.validate.min.js" th:src="@{/ajax/libs/validate/jquery.validate.min.js}"></script>
 <script src="../static/ajax/libs/layer/layer.min.js" th:src="@{/ajax/libs/layer/layer.min.js}"></script>

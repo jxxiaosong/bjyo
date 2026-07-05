@@ -1,66 +1,124 @@
 <!DOCTYPE html>
-<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--360浏览器优先以webkit内核解析-->
-    <title>BJYO介绍</title>
+    <meta name="renderer" content="webkit">
+    <title>BJYO工作台</title>
     <link rel="shortcut icon" href="favicon.ico">
     <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
     <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
     <link href="../static/css/style.min.css" th:href="@{/css/style.min.css}" rel="stylesheet"/>
+    <link href="../static/bjyo/css/bjyo-workbench.css" th:href="@{/bjyo/css/bjyo-workbench.css?v=4.8.3}" rel="stylesheet"/>
 </head>
 
-<body class="gray-bg">
-    <div class="row border-bottom white-bg dashboard-header">
-        <div class="col-sm-3">
-            <h2>Hello,Guest</h2>
-            <small>移动设备访问请扫描以下二维码：</small>
-            <br>
-            <br>
-            <img th:src="@{/img/qr_code.png}" width="100%" style="max-width:264px;">
-            <br>
-        </div>
-        <div class="col-sm-5">
-            <h2>BJYO后台管理框架</h2>
-            <p>一直想做一款后台管理系统，看了很多优秀的开源项目但是发现没有合适自己的。于是利用空闲休息时间开始自己写一套后台系统。如此有了BJYO管理系统。，她可以用于所有的Web应用程序，如<b>网站管理后台</b>，<b>网站会员中心</b>，<b>CMS</b>，<b>CRM</b>，<b>OA</b>等等，当然，您也可以对她进行深度定制，以做出更强系统。所有前端后台代码封装过后十分精简易上手，出错概率低。同时支持移动客户端访问。系统会陆续更新一些实用功能。</p>
-            <p>
-                <b>当前版本：</b><span>v[[${version}]]</span>
-            </p>
-            <br>
+<body class="bjyo-workbench-body">
+    <main class="bjyo-workbench">
+        <section class="bjyo-workbench-hero">
+            <div>
+                <h1>BJYO 运营工作台</h1>
+                <p>集中管理用户、权限、菜单、参数、日志、定时任务和代码生成，让后台基础能力开箱即用，也方便继续扩展成业务系统。</p>
+                <div class="bjyo-version-chip">
+                    <i class="fa fa-code-fork"></i>
+                    当前版本 v[[${version}]]
+                </div>
+            </div>
+            <div class="bjyo-hero-status">
+                <div class="status-item">
+                    <strong>17+</strong>
+                    <span>系统管理能力</span>
+                </div>
+                <div class="status-item">
+                    <strong>4</strong>
+                    <span>核心支撑模块</span>
+                </div>
+                <div class="status-item">
+                    <strong>24h</strong>
+                    <span>任务与日志可追踪</span>
+                </div>
+            </div>
+        </section>
 
-        </div>
-        <div class="col-sm-4">
-            <h4>技术选型：</h4>
-            <ol>
-                <li>核心框架：Spring Boot。</li>
-                <li>安全框架：Apache Shiro。</li>
-                <li>模板引擎：Thymeleaf。</li>
-                <li>持久层框架：MyBatis。</li>
-                <li>定时任务：Quartz。</li>
-                <li>数据库连接池：Druid。</li>
-                <li>工具类：Fastjson。</li>
-                <li>更多……</li>
-            </ol>
-        </div>
+        <section class="bjyo-grid">
+            <div class="bjyo-card bjyo-kpi">
+                <div class="icon"><i class="fa fa-shield"></i></div>
+                <strong>权限</strong>
+                <span>菜单、角色、数据范围统一控制</span>
+            </div>
+            <div class="bjyo-card bjyo-kpi">
+                <div class="icon"><i class="fa fa-tasks"></i></div>
+                <strong>任务</strong>
+                <span>Quartz 调度与执行日志</span>
+            </div>
+            <div class="bjyo-card bjyo-kpi">
+                <div class="icon"><i class="fa fa-file-code-o"></i></div>
+                <strong>生成</strong>
+                <span>从表结构快速生成基础代码</span>
+            </div>
+            <div class="bjyo-card bjyo-kpi">
+                <div class="icon"><i class="fa fa-line-chart"></i></div>
+                <strong>审计</strong>
+                <span>登录日志和操作日志留痕</span>
+            </div>
+        </section>
 
-    </div>
+        <section class="bjyo-section-grid">
+            <div class="bjyo-panel">
+                <h2>常用模块</h2>
+                <div class="bjyo-module-list">
+                    <div class="bjyo-module">
+                        <strong><i class="fa fa-users"></i>用户管理</strong>
+                        <span>维护账号、部门、岗位、角色和授权关系。</span>
+                    </div>
+                    <div class="bjyo-module">
+                        <strong><i class="fa fa-sitemap"></i>菜单管理</strong>
+                        <span>配置导航、按钮权限和页面访问入口。</span>
+                    </div>
+                    <div class="bjyo-module">
+                        <strong><i class="fa fa-database"></i>字典参数</strong>
+                        <span>集中维护枚举字典与系统运行参数。</span>
+                    </div>
+                    <div class="bjyo-module">
+                        <strong><i class="fa fa-clock-o"></i>定时任务</strong>
+                        <span>管理周期任务、执行策略和异常记录。</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bjyo-panel">
+                <h2>技术栈</h2>
+                <ul class="bjyo-stack">
+                    <li><b>应用框架</b><span>Spring Boot</span></li>
+                    <li><b>安全认证</b><span>Apache Shiro</span></li>
+                    <li><b>模板引擎</b><span>Thymeleaf</span></li>
+                    <li><b>持久层</b><span>MyBatis + Druid</span></li>
+                    <li><b>任务调度</b><span>Quartz</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="bjyo-section-grid">
+            <div class="bjyo-panel">
+                <h2>近期重点</h2>
+                <ul class="bjyo-timeline">
+                    <li><b>品牌替换</b><span>BJYO 标识与包名已完成统一</span></li>
+                    <li><b>包名调整</b><span>Java 根包切换为 com.bjyo</span></li>
+                    <li><b>界面升级</b><span>登录、注册、工作台视觉重塑</span></li>
+                </ul>
+            </div>
+            <div class="bjyo-panel">
+                <h2>下一步建议</h2>
+                <ul class="bjyo-timeline">
+                    <li><b>数据库</b><span class="bjyo-tag">导入 bjyo_20260319.sql</span></li>
+                    <li><b>配置</b><span>检查数据源账号和上传路径</span></li>
+                    <li><b>部署</b><span>使用 bjyo-admin.jar 启动服务</span></li>
+                </ul>
+            </div>
+        </section>
+    </main>
 
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
-    <script type="text/javascript">
-	    $('#pay-qrcode').click(function(){
-	        var html=$(this).html();
-	        parent.layer.open({
-	            title: false,
-	            type: 1,
-	            closeBtn:false,
-	            shadeClose:true,
-	            area: ['600px', '360px'],
-	            content: html
-	        });
-	    });
-    </script>
 </body>
 </html>
