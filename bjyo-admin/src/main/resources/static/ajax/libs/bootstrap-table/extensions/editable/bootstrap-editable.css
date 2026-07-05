@@ -59,7 +59,7 @@
    margin-left: 7px; 
 }
 
-/*for jquebjyo-ui buttons need set height to look more pretty*/
+/*for jquery-ui buttons need set height to look more pretty*/
 .editable-buttons button.ui-button-icon-only {
    height: 24px; 
    width: 30px;
