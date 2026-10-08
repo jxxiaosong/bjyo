@@ -1,0 +1,28 @@
+/* BJYO visual foundation. Original styling inspired by Tabler and Vben Admin. */
+:root {
+    --bjyo-page-bg: #f5f7fb;
+    --bjyo-surface: #fff;
+    --bjyo-surface-soft: #f8fafc;
+    --bjyo-border: #e8ecf3;
+    --bjyo-border-strong: #d8dfe9;
+    --bjyo-text: #1e293b;
+    --bjyo-muted: #778398;
+    --bjyo-primary: #3867f4;
+    --bjyo-primary-dark: #2851d7;
+    --bjyo-primary-soft: #edf2ff;
+    --bjyo-accent: #b7791f;
+    --bjyo-danger: #dc4c64;
+    --bjyo-shadow: 0 3px 16px rgba(31, 45, 78, .035);
+    --bjyo-radius: 12px;
+}
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; color: var(--bjyo-text); }
+a { color: var(--bjyo-primary); }
+a:hover, a:focus { color: var(--bjyo-primary-dark); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #a9bdfb; outline-offset: 3px; }
+.bjyo-brand-mark { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; width: 36px; height: 36px; border-radius: 10px; background: var(--bjyo-primary); color: #fff; font-size: 23px; font-weight: 800; line-height: 1; }
+.bjyo-eyebrow { margin: 0 0 10px; color: var(--bjyo-muted); font-size: 11px; font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase; }
+.bjyo-icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px; background: #edf2ff; color: #3867f4; font-size: 18px; }
+.bjyo-icon.teal { color: #139b85; background: #e8f8f3; }
+.bjyo-icon.violet { color: #845bd9; background: #f2edfd; }
+.bjyo-icon.amber { color: #c08728; background: #fff6e6; }
+@media (prefers-reduced-motion: reduce) { *, *:before, *:after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }

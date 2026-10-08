@@ -15,7 +15,8 @@
     <link th:href="@{/css/style.min.css}" rel="stylesheet"/>
     <link th:href="@{/css/skins.css}" rel="stylesheet"/>
     <link th:href="@{/bjyo/css/bjyo-ui.css?v=4.8.3}" rel="stylesheet"/>
-    <link th:href="@{/bjyo/css/bjyo-shell.css?v=4.8.3}" rel="stylesheet"/>
+    <link th:href="@{/bjyo/css/bjyo-theme.css?v=20261008}" rel="stylesheet"/>
+    <link th:href="@{/bjyo/css/bjyo-shell.css?v=20261008}" rel="stylesheet"/>
     <style type="text/css">#noticeItems li a{transition:background .15s;border-radius:2px}#noticeItems li a:hover{background:#f7f9fb;text-decoration:none}#noticeItems li a:active{background:#eef2f7}#noticeItems li a:focus{background:transparent;outline:0}#noticeList .mark-all-read{font-size:12px;color:#5b9bd5;text-decoration:none;padding:2px 8px;border-radius:3px;transition:background 0.15s}#noticeList .mark-all-read:hover{background:#eef5fc;color:#2b7cc1}#noticeList .mark-all-read:active{background:#eef5fc;color:#2b7cc1}#noticeList .mark-all-read:focus{outline:none;background:transparent}
 </style>
 </head>
@@ -27,11 +28,12 @@
         <div class="nav-close">
             <i class="fa fa-times-circle"></i>
         </div>
-        <a th:href="@{/index}">
-            <li class="logo hidden-xs">
-                <span class="logo-lg">Bjyo</span>
-            </li>
-         </a>
+        <a class="bjyo-brand-link" th:href="@{/index}" aria-label="BJYO 管理控制台">
+            <div class="logo hidden-xs">
+                <span class="bjyo-brand-mark" aria-hidden="true">B</span>
+                <span class="logo-lg">BJYO<small>管理控制台</small></span>
+            </div>
+        </a>
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
             	<li>
@@ -50,7 +52,7 @@
 				    </div>
             	</li>
                 <li>
-                    <a class="menuItem" th:href="@{/system/main}"><i class="fa fa-home"></i> <span class="nav-label">首页</span> </a>
+                    <a class="menuItem" th:href="@{/system/main}"><i class="fa fa-home"></i> <span class="nav-label">工作台</span> </a>
                 </li>
                 <li th:each="menu : ${menus}">
                 	<a th:class="@{${!#strings.isEmpty(menu.url) && menu.url != '#'} ? ${menu.target}}" th:href="@{${#strings.isEmpty(menu.url)} ? |#| : ${menu.url}}" th:data-refresh="${menu.isRefresh == '0'}">
@@ -197,6 +199,7 @@
                     <a class="navbar-minimalize minimalize-styl-2" style="color:#FFF;" href="javascript:;" title="收起菜单">
                     	<i class="fa fa-bars"></i>
                     </a>
+                    <span class="bjyo-shell-location">工作空间<strong>管理控制台</strong></span>
                 </div>
                 <ul class="nav navbar-top-links navbar-right welcome-message">
                     <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="开发文档" href="http://doc.bjyo.vip/bjyo" target="_blank"><i class="fa fa-question-circle"></i> 文档</a></li>
@@ -253,7 +256,7 @@
             </button>
             <nav class="page-tabs menuTabs">
                 <div class="page-tabs-content">
-                    <a href="javascript:;" class="menuTab" th:data-id="@{/system/main}">首页</a>
+                    <a href="javascript:;" class="menuTab" th:data-id="@{/system/main}">工作台</a>
                 </div>
             </nav>
             <button class="roll-nav roll-right tabRight">
@@ -266,7 +269,7 @@
 
         <div class="row mainContent" id="content-main" th:classappend="${mainClass}">
             <iframe class="Bjyo_iframe" name="iframe0" width="100%" height="100%" th:data-id="@{/system/main}"
-                frameborder="0" seamless></iframe>
+                title="管理页面" frameborder="0" seamless></iframe>
         </div>
 
         <div th:if="${footer}" class="footer">

@@ -2,7 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>注册BJYO系统</title>
     <meta name="description" content="BJYO后台管理框架">
     <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
@@ -10,7 +10,8 @@
     <link href="../static/css/style.min.css" th:href="@{/css/style.min.css}" rel="stylesheet"/>
     <link href="../static/css/login.min.css" th:href="@{/css/login.min.css}" rel="stylesheet"/>
     <link href="../static/bjyo/css/bjyo-ui.css" th:href="@{/bjyo/css/bjyo-ui.css?v=4.8.3}" rel="stylesheet"/>
-    <link href="../static/bjyo/css/bjyo-auth.css" th:href="@{/bjyo/css/bjyo-auth.css?v=4.8.3}" rel="stylesheet"/>
+    <link href="../static/bjyo/css/bjyo-theme.css" th:href="@{/bjyo/css/bjyo-theme.css?v=20261008}" rel="stylesheet"/>
+    <link href="../static/bjyo/css/bjyo-auth.css" th:href="@{/bjyo/css/bjyo-auth.css?v=20261008}" rel="stylesheet"/>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="../static/favicon.ico" th:href="@{favicon.ico}"/>
@@ -21,35 +22,35 @@
         <section class="bjyo-auth-panel">
             <div class="bjyo-auth-grid">
                 <div class="bjyo-auth-brand">
-                    <div class="bjyo-auth-mark">
-                        <img alt="[ BJYO ]" src="../static/bjyo.png" th:src="@{/bjyo.png}">
-                        <span>低代码支撑 / 运维可见 / 权限清晰</span>
+                    <div class="bjyo-auth-mark"><span class="bjyo-brand-mark" aria-hidden="true">B</span><span>BJYO<small>ADMIN WORKSPACE</small></span></div>
+                    <div class="bjyo-eyebrow">YOUR WORK, CONNECTED</div>
+                    <h1>让管理更有序，<br>让工作更轻松。</h1>
+                    <p>从团队协作到日常运营，一个清晰的工作空间，连接每一项重要工作。</p>
+                    <div class="bjyo-auth-visual" aria-hidden="true">
+                        <div class="bjyo-auth-visual-heading"><i class="fa fa-th-large"></i> 一站式管理工作台<span class="bjyo-visual-dot"></span></div>
+                        <div class="bjyo-auth-visual-row"><span class="bjyo-icon"><i class="fa fa-users"></i></span><div><strong>团队与权限</strong><small>连接成员，明确每一份职责</small></div><i class="fa fa-angle-right"></i></div>
+                        <div class="bjyo-auth-visual-row"><span class="bjyo-icon teal"><i class="fa fa-sliders"></i></span><div><strong>业务与配置</strong><small>集中管理，让日常操作更简单</small></div><i class="fa fa-angle-right"></i></div>
+                        <div class="bjyo-auth-visual-row"><span class="bjyo-icon violet"><i class="fa fa-line-chart"></i></span><div><strong>监控与审计</strong><small>每一次操作，都有迹可循</small></div><i class="fa fa-angle-right"></i></div>
                     </div>
-                    <h1>创建 BJYO 账号</h1>
-                    <p>为管理后台建立访问入口，后续可通过角色、菜单和数据权限控制不同用户的操作边界。</p>
-                    <ul class="bjyo-auth-points">
-                        <li><i class="fa fa-users"></i> 用户与角色管理</li>
-                        <li><i class="fa fa-sitemap"></i> 菜单权限配置</li>
-                        <li><i class="fa fa-history"></i> 操作日志审计</li>
-                        <li><i class="fa fa-cogs"></i> 参数字典维护</li>
-                    </ul>
-                    <div class="bjyo-auth-footer">Copyright © 2018-2026 bjyo.vip All Rights Reserved.</div>
+                    <ul class="bjyo-auth-points"><li><i class="fa fa-check-circle-o"></i> 清晰的权限管理</li><li><i class="fa fa-check-circle-o"></i> 高效的业务协作</li></ul>
+                    <div class="bjyo-auth-footer">BJYO · 为高效管理而设计</div>
                 </div>
 
                 <div class="bjyo-auth-card">
                     <form id="registerForm" autocomplete="off">
-                        <h2>注册账号</h2>
-                        <p class="auth-subtitle">完成账号创建后即可返回登录</p>
-                        <input type="text" name="username" class="form-control uname" placeholder="用户名" maxlength="20"/>
-                        <input type="password" name="password" class="form-control pword" placeholder="密码" maxlength="20"/>
-                        <input type="password" name="confirmPassword" class="form-control pword" placeholder="确认密码" maxlength="20"/>
+                        <div class="bjyo-eyebrow">GET STARTED</div>
+                        <h2>创建你的账号</h2>
+                        <p class="auth-subtitle">填写以下信息，开启新的工作空间。</p>
+                        <div class="bjyo-auth-field"><label for="auth-username">用户名</label><input type="text" id="auth-username" name="username" autocomplete="username" class="form-control uname" placeholder="用户名" maxlength="20"/></div>
+                        <div class="bjyo-auth-field"><label for="auth-password">密码</label><input type="password" id="auth-password" name="password" autocomplete="new-password" class="form-control pword" placeholder="密码" maxlength="20"/></div>
+                        <div class="bjyo-auth-field"><label for="auth-confirmPassword">确认密码</label><input type="password" id="auth-confirmPassword" name="confirmPassword" autocomplete="new-password" class="form-control pword" placeholder="确认密码" maxlength="20"/></div>
                         <div class="row captcha-row" th:if="${captchaEnabled==true}">
                             <div class="col-xs-6">
-                                <input type="text" name="validateCode" class="form-control code" placeholder="验证码" maxlength="5">
+                                <input type="text" aria-label="验证码" name="validateCode" class="form-control code" placeholder="验证码" maxlength="5">
                             </div>
                             <div class="col-xs-6">
                                 <a href="javascript:void(0);" title="点击更换验证码">
-                                    <img th:src="@{/captcha/captchaImage(type=${captchaType})}" class="imgcode"/>
+                                    <img th:src="@{/captcha/captchaImage(type=${captchaType})}" class="imgcode" alt="验证码，点击更换"/>
                                 </a>
                             </div>
                         </div>
@@ -57,11 +58,12 @@
                             <input type="checkbox" id="acceptTerm" name="acceptTerm"> <label for="acceptTerm">我已阅读并同意</label>
                             <a href="javascript:;">使用条款</a>
                         </div>
-                        <button class="btn btn-success btn-block" id="btnSubmit" data-loading="正在验证注册，请稍候...">注册</button>
+                        <button class="btn btn-success btn-block" id="btnSubmit" data-loading="正在验证注册，请稍候...">创建账号 <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
                         <div class="bjyo-auth-alt">
                             <span>已经注册过？</span>
                             <a th:href="@{/login}">直接登录</a>
                         </div>
+                        <div class="bjyo-auth-note"><i class="fa fa-shield" aria-hidden="true"></i> 账号访问由系统统一管理</div>
                     </form>
                 </div>
             </div>

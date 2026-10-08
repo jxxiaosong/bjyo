@@ -1,124 +1,73 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="renderer" content="webkit">
-    <title>BJYO工作台</title>
-    <link rel="shortcut icon" href="favicon.ico">
-    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
-    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
-    <link href="../static/css/style.min.css" th:href="@{/css/style.min.css}" rel="stylesheet"/>
-    <link href="../static/bjyo/css/bjyo-workbench.css" th:href="@{/bjyo/css/bjyo-workbench.css?v=4.8.3}" rel="stylesheet"/>
+    <title>BJYO 工作台</title>
+    <link th:href="@{/favicon.ico}" rel="shortcut icon">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{/bjyo/css/bjyo-theme.css?v=20261008}" rel="stylesheet">
+    <link th:href="@{/bjyo/css/bjyo-workbench.css?v=20261008}" rel="stylesheet">
 </head>
-
 <body class="bjyo-workbench-body">
-    <main class="bjyo-workbench">
-        <section class="bjyo-workbench-hero">
-            <div>
-                <h1>BJYO 运营工作台</h1>
-                <p>集中管理用户、权限、菜单、参数、日志、定时任务和代码生成，让后台基础能力开箱即用，也方便继续扩展成业务系统。</p>
-                <div class="bjyo-version-chip">
-                    <i class="fa fa-code-fork"></i>
-                    当前版本 v[[${version}]]
+<main class="bjyo-workbench">
+    <header class="bjyo-workbench-heading">
+        <div><h1>工作台</h1><p>你的日常工作，从这里开始。</p></div>
+        <span class="bjyo-version-chip"><i class="fa fa-cube" aria-hidden="true"></i> BJYO v<span th:text="${version}">4.8.3</span></span>
+    </header>
+    <section class="bjyo-workbench-hero">
+        <div><div class="bjyo-eyebrow">WELCOME TO YOUR WORKSPACE</div><h2>欢迎回来，开启高效的一天</h2><p>管理团队、配置业务、查看运行记录。<br>让每一项工作井井有条，让每一次操作清晰可见。</p></div>
+        <div class="bjyo-hero-art" aria-hidden="true"><span><i class="fa fa-th-large"></i></span><span><i class="fa fa-shield"></i></span><span><i class="fa fa-sliders"></i></span><span><i class="fa fa-bar-chart"></i></span></div>
+    </section>
+    <section class="bjyo-capabilities" aria-label="平台能力">
+        <article class="bjyo-capability"><span class="bjyo-icon"><i class="fa fa-users" aria-hidden="true"></i></span><div><h3>身份与权限</h3><p>用户 · 角色 · 菜单</p></div></article>
+        <article class="bjyo-capability"><span class="bjyo-icon teal"><i class="fa fa-sliders" aria-hidden="true"></i></span><div><h3>组织与配置</h3><p>部门 · 字典 · 参数</p></div></article>
+        <article class="bjyo-capability"><span class="bjyo-icon amber"><i class="fa fa-line-chart" aria-hidden="true"></i></span><div><h3>运行与监控</h3><p>日志 · 任务 · 服务</p></div></article>
+        <article class="bjyo-capability"><span class="bjyo-icon violet"><i class="fa fa-code" aria-hidden="true"></i></span><div><h3>开发工具</h3><p>代码生成 · 表单构建</p></div></article>
+    </section>
+    <div class="bjyo-workbench-columns">
+        <div>
+            <section class="bjyo-panel">
+                <div class="bjyo-panel-header"><h2>快捷入口</h2><span>常用功能，一步直达</span></div>
+                <div class="bjyo-shortcuts">
+                    <a class="bjyo-shortcut" shiro:hasPermission="system:user:view" th:href="@{/system/user}" data-bjyo-tab="用户管理"><span class="bjyo-icon "><i class="fa fa-users" aria-hidden="true"></i></span><span>用户管理</span></a>
+                    <a class="bjyo-shortcut" shiro:hasPermission="system:role:view" th:href="@{/system/role}" data-bjyo-tab="角色权限"><span class="bjyo-icon violet"><i class="fa fa-shield" aria-hidden="true"></i></span><span>角色权限</span></a>
+                    <a class="bjyo-shortcut" shiro:hasPermission="system:dept:view" th:href="@{/system/dept}" data-bjyo-tab="部门管理"><span class="bjyo-icon teal"><i class="fa fa-sitemap" aria-hidden="true"></i></span><span>部门管理</span></a>
+                    <a class="bjyo-shortcut" shiro:hasPermission="system:notice:view" th:href="@{/system/notice}" data-bjyo-tab="通知公告"><span class="bjyo-icon amber"><i class="fa fa-bell-o" aria-hidden="true"></i></span><span>通知公告</span></a>
+                    <a class="bjyo-shortcut" shiro:hasPermission="system:dict:view" th:href="@{/system/dict}" data-bjyo-tab="字典管理"><span class="bjyo-icon teal"><i class="fa fa-book" aria-hidden="true"></i></span><span>字典管理</span></a>
+                    <a class="bjyo-shortcut" shiro:hasPermission="system:config:view" th:href="@{/system/config}" data-bjyo-tab="参数配置"><span class="bjyo-icon "><i class="fa fa-sliders" aria-hidden="true"></i></span><span>参数配置</span></a>
+                    <a class="bjyo-shortcut" shiro:hasPermission="monitor:job:view" th:href="@{/monitor/job}" data-bjyo-tab="定时任务"><span class="bjyo-icon amber"><i class="fa fa-clock-o" aria-hidden="true"></i></span><span>定时任务</span></a>
+                    <a class="bjyo-shortcut" shiro:hasPermission="tool:gen:view" th:href="@{/tool/gen}" data-bjyo-tab="代码生成"><span class="bjyo-icon violet"><i class="fa fa-code" aria-hidden="true"></i></span><span>代码生成</span></a>
+                    <p class="bjyo-empty-shortcuts">暂无可用的快捷入口，请联系管理员分配权限。</p>
                 </div>
-            </div>
-            <div class="bjyo-hero-status">
-                <div class="status-item">
-                    <strong>17+</strong>
-                    <span>系统管理能力</span>
-                </div>
-                <div class="status-item">
-                    <strong>4</strong>
-                    <span>核心支撑模块</span>
-                </div>
-                <div class="status-item">
-                    <strong>24h</strong>
-                    <span>任务与日志可追踪</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="bjyo-grid">
-            <div class="bjyo-card bjyo-kpi">
-                <div class="icon"><i class="fa fa-shield"></i></div>
-                <strong>权限</strong>
-                <span>菜单、角色、数据范围统一控制</span>
-            </div>
-            <div class="bjyo-card bjyo-kpi">
-                <div class="icon"><i class="fa fa-tasks"></i></div>
-                <strong>任务</strong>
-                <span>Quartz 调度与执行日志</span>
-            </div>
-            <div class="bjyo-card bjyo-kpi">
-                <div class="icon"><i class="fa fa-file-code-o"></i></div>
-                <strong>生成</strong>
-                <span>从表结构快速生成基础代码</span>
-            </div>
-            <div class="bjyo-card bjyo-kpi">
-                <div class="icon"><i class="fa fa-line-chart"></i></div>
-                <strong>审计</strong>
-                <span>登录日志和操作日志留痕</span>
-            </div>
-        </section>
-
-        <section class="bjyo-section-grid">
-            <div class="bjyo-panel">
-                <h2>常用模块</h2>
+            </section>
+            <section class="bjyo-panel">
+                <div class="bjyo-panel-header"><h2>管理与运维</h2><span>保持工作有序进行</span></div>
                 <div class="bjyo-module-list">
-                    <div class="bjyo-module">
-                        <strong><i class="fa fa-users"></i>用户管理</strong>
-                        <span>维护账号、部门、岗位、角色和授权关系。</span>
-                    </div>
-                    <div class="bjyo-module">
-                        <strong><i class="fa fa-sitemap"></i>菜单管理</strong>
-                        <span>配置导航、按钮权限和页面访问入口。</span>
-                    </div>
-                    <div class="bjyo-module">
-                        <strong><i class="fa fa-database"></i>字典参数</strong>
-                        <span>集中维护枚举字典与系统运行参数。</span>
-                    </div>
-                    <div class="bjyo-module">
-                        <strong><i class="fa fa-clock-o"></i>定时任务</strong>
-                        <span>管理周期任务、执行策略和异常记录。</span>
-                    </div>
+                    <a class="bjyo-module" shiro:hasPermission="monitor:operlog:view" th:href="@{/monitor/operlog}" data-bjyo-tab="操作日志"><span class="bjyo-icon"><i class="fa fa-history" aria-hidden="true"></i></span><div><strong>操作日志</strong><small>查看操作记录，追踪重要变更</small></div><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    <a class="bjyo-module" shiro:hasPermission="monitor:logininfor:view" th:href="@{/monitor/logininfor}" data-bjyo-tab="登录日志"><span class="bjyo-icon teal"><i class="fa fa-sign-in" aria-hidden="true"></i></span><div><strong>登录日志</strong><small>了解账号访问情况与登录记录</small></div><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    <a class="bjyo-module" shiro:hasPermission="monitor:server:view" th:href="@{/monitor/server}" data-bjyo-tab="服务监控"><span class="bjyo-icon violet"><i class="fa fa-server" aria-hidden="true"></i></span><div><strong>服务监控</strong><small>查看服务器资源与应用运行信息</small></div><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    <p class="bjyo-empty-shortcuts">暂无可用的运维入口，请联系管理员分配权限。</p>
                 </div>
-            </div>
-
-            <div class="bjyo-panel">
-                <h2>技术栈</h2>
-                <ul class="bjyo-stack">
-                    <li><b>应用框架</b><span>Spring Boot</span></li>
-                    <li><b>安全认证</b><span>Apache Shiro</span></li>
-                    <li><b>模板引擎</b><span>Thymeleaf</span></li>
-                    <li><b>持久层</b><span>MyBatis + Druid</span></li>
-                    <li><b>任务调度</b><span>Quartz</span></li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="bjyo-section-grid">
-            <div class="bjyo-panel">
-                <h2>近期重点</h2>
-                <ul class="bjyo-timeline">
-                    <li><b>品牌替换</b><span>BJYO 标识与包名已完成统一</span></li>
-                    <li><b>包名调整</b><span>Java 根包切换为 com.bjyo</span></li>
-                    <li><b>界面升级</b><span>登录、注册、工作台视觉重塑</span></li>
-                </ul>
-            </div>
-            <div class="bjyo-panel">
-                <h2>下一步建议</h2>
-                <ul class="bjyo-timeline">
-                    <li><b>数据库</b><span class="bjyo-tag">导入 bjyo_20260319.sql</span></li>
-                    <li><b>配置</b><span>检查数据源账号和上传路径</span></li>
-                    <li><b>部署</b><span>使用 bjyo-admin.jar 启动服务</span></li>
-                </ul>
-            </div>
-        </section>
-    </main>
-
-    <script th:src="@{/js/jquery.min.js}"></script>
-    <script th:src="@{/js/bootstrap.min.js}"></script>
-    <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+            </section>
+        </div>
+        <aside class="bjyo-workbench-aside">
+            <section class="bjyo-panel">
+                <div class="bjyo-panel-header"><h2>平台信息</h2><span>ABOUT BJYO</span></div>
+                <ul class="bjyo-stack"><li><b>应用框架</b><span>Spring Boot</span></li><li><b>安全认证</b><span>Apache Shiro</span></li><li><b>模板引擎</b><span>Thymeleaf</span></li><li><b>数据访问</b><span>MyBatis · Druid</span></li><li><b>任务调度</b><span>Quartz</span></li></ul>
+            </section>
+            <section class="bjyo-workspace-card"><div class="bjyo-eyebrow">PERSONAL WORKSPACE</div><h3>从完善个人信息开始</h3><p>管理个人资料和账号设置，让团队协作更加顺畅。</p><a th:href="@{/system/user/profile}" data-bjyo-tab="个人中心">前往个人中心 <i class="fa fa-arrow-right" aria-hidden="true"></i></a></section>
+        </aside>
+    </div>
+    <footer class="bjyo-workbench-footer"><span>BJYO · 为高效管理而设计</span><span>清晰的工作空间，让管理更简单</span></footer>
+</main>
+<script th:inline="javascript">var ctx = [[@{/}]];</script>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+<script th:src="@{/bjyo/js/bjyo-ui.js?v=4.8.3}"></script>
+<script th:src="@{/bjyo/js/common.js?v=4.8.3}"></script>
+<script th:src="@{/bjyo/js/bjyo-workbench.js?v=20261008}"></script>
 </body>
 </html>
