@@ -1,29 +1,37 @@
+var sliderCaptcha;
+var loginPending = false;
 
 $(function() {
     validateKickout();
     validateRule();
-    $('.imgcode').click(function() {
-        var url = ctx + "captcha/captchaImage?type=" + captchaType + "&s=" + Math.random();
-        $(".imgcode").attr("src", url);
-    });
+    if (captchaEnabled) {
+        sliderCaptcha = new window.BJYOSliderCaptcha({
+            ctx: ctx,
+            onEnabled: function(enabled) { captchaEnabled = enabled; }
+        });
+    }
 });
 
 function login() {
+    if (loginPending) return false;
     var username = $.common.trim($("input[name='username']").val());
     var password = $.common.trim($("input[name='password']").val());
-    var validateCode = $("input[name='validateCode']").val();
+    var proof = sliderCaptcha && sliderCaptcha.getProof();
     var rememberMe = $("input[name='rememberme']").is(':checked');
-    if($.common.isEmpty(validateCode) && captchaEnabled) {
-        $.modal.msg("请输入验证码");
+    if (captchaEnabled && !proof) {
+        sliderCaptcha.open();
         return false;
     }
+    loginPending = true;
     $.ajax({
         type: "post",
         url: ctx + "login",
+        timeout: 15000,
         data: {
             "username": username,
             "password": password,
-            "validateCode": validateCode,
+            "uuid": proof ? proof.uuid : "",
+            "validateCode": proof ? proof.code : "",
             "rememberMe": rememberMe
         },
         beforeSend: function () {
@@ -33,10 +41,16 @@ function login() {
             if (r.code == web_status.SUCCESS) {
                 location.href = ctx + 'index';
             } else {
-                $('.imgcode').click();
-                $(".code").val("");
+                if (sliderCaptcha) sliderCaptcha.reset();
                 $.modal.msg(r.msg);
             }
+        },
+        error: function() {
+            if (sliderCaptcha) sliderCaptcha.reset();
+            $.modal.msg("登录请求失败，请重新验证后重试");
+        },
+        complete: function() {
+            loginPending = false;
             $.modal.closeLoading();
         }
     });

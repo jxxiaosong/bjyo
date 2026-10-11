@@ -12,6 +12,7 @@
     <link href="../static/bjyo/css/bjyo-ui.css" th:href="@{/bjyo/css/bjyo-ui.css?v=4.8.3}" rel="stylesheet"/>
     <link href="../static/bjyo/css/bjyo-theme.css" th:href="@{/bjyo/css/bjyo-theme.css?v=20261008}" rel="stylesheet"/>
     <link href="../static/bjyo/css/bjyo-auth.css" th:href="@{/bjyo/css/bjyo-auth.css?v=20261008}" rel="stylesheet"/>
+    <link href="../static/bjyo/css/bjyo-slider-captcha.css" th:href="@{/bjyo/css/bjyo-slider-captcha.css?v=20261011}" rel="stylesheet"/>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="../static/favicon.ico" th:href="@{favicon.ico}"/>
@@ -46,15 +47,13 @@
                         <p class="auth-subtitle">登录账号，开始今天的工作。</p>
                         <div class="bjyo-auth-field"><label for="auth-username">用户名</label><input type="text" id="auth-username" name="username" autocomplete="username" class="form-control uname" placeholder="用户名"/></div>
                         <div class="bjyo-auth-field"><label for="auth-password">密码</label><input type="password" id="auth-password" name="password" autocomplete="current-password" class="form-control pword" placeholder="密码"/></div>
-                        <div class="row captcha-row" th:if="${captchaEnabled==true}">
-                            <div class="col-xs-6">
-                                <input type="text" aria-label="验证码" name="validateCode" class="form-control code" placeholder="验证码" maxlength="5"/>
-                            </div>
-                            <div class="col-xs-6">
-                                <a href="javascript:void(0);" title="点击更换验证码">
-                                    <img th:src="@{/captcha/captchaImage(type=${captchaType})}" class="imgcode" alt="验证码，点击更换"/>
-                                </a>
-                            </div>
+                        <div id="slider-captcha" class="slider-captcha" th:if="${captchaEnabled==true}">
+                            <button type="button" id="slider-captcha-trigger" class="slider-captcha-trigger" aria-haspopup="dialog" aria-expanded="false">
+                                <span id="slider-trigger-icon" aria-hidden="true">◇</span>
+                                <span id="slider-trigger-label">点击进行安全验证</span>
+                                <span aria-hidden="true">›</span>
+                            </button>
+                            <span id="slider-trigger-status" class="slider-status" role="status" aria-live="polite"></span>
                         </div>
                         <div class="checkbox-custom" th:if="${isRemembered}" th:classappend="${captchaEnabled==false} ? 'm-t'">
                             <input type="checkbox" id="rememberme" name="rememberme"> <label for="rememberme">保持登录</label>
@@ -70,6 +69,28 @@
             </div>
         </section>
     </main>
+    <dialog id="slider-captcha-dialog" class="slider-captcha-dialog" aria-labelledby="slider-dialog-title" aria-describedby="slider-dialog-description" th:if="${captchaEnabled==true}">
+        <div class="slider-captcha-header">
+            <div><strong id="slider-dialog-title">安全验证</strong><span id="slider-dialog-description">拖动滑块完成拼图</span></div>
+            <button type="button" id="slider-captcha-close" class="slider-captcha-close" aria-label="关闭安全验证">×</button>
+        </div>
+        <div class="slider-captcha-panel">
+            <div class="slider-captcha-image">
+                <img id="slider-background" class="slider-background" alt="拼图背景" hidden/>
+                <img id="slider-piece" class="slider-piece" alt="拼图片块" hidden/>
+                <div id="slider-captcha-loading" class="slider-captcha-loading" role="status">验证码加载中…</div>
+            </div>
+            <div id="slider-track" class="slider-track">
+                <div id="slider-progress" class="slider-progress"></div>
+                <span id="slider-tip" class="slider-tip">按住滑块，拖动完成拼图</span>
+                <button type="button" id="slider-handle" class="slider-handle" role="slider" aria-label="拖动滑块" aria-valuemin="0" aria-valuemax="268" aria-valuenow="0" disabled>»</button>
+            </div>
+            <div class="slider-actions">
+                <span id="slider-status" class="slider-status" role="status" aria-live="polite"></span>
+                <button type="button" id="slider-refresh" class="slider-refresh">刷新</button>
+            </div>
+        </div>
+    </dialog>
 <script th:inline="javascript"> var ctx = [[@{/}]]; var captchaType = [[${captchaType}]]; var captchaEnabled = [[${captchaEnabled}]];</script>
 <!--[if lte IE 8]><script>window.location.href=ctx+'html/ie.html';</script><![endif]-->
 <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
@@ -77,6 +98,7 @@
 <script src="../static/ajax/libs/layer/layer.min.js" th:src="@{/ajax/libs/layer/layer.min.js}"></script>
 <script src="../static/ajax/libs/blockUI/jquery.blockUI.js" th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
 <script src="../static/bjyo/js/bjyo-ui.js" th:src="@{/bjyo/js/bjyo-ui.js?v=4.8.3}"></script>
-<script src="../static/bjyo/login.js" th:src="@{/bjyo/login.js}"></script>
+<script src="../static/bjyo/js/bjyo-slider-captcha.js" th:src="@{/bjyo/js/bjyo-slider-captcha.js?v=20261011}"></script>
+<script src="../static/bjyo/login.js" th:src="@{/bjyo/login.js?v=20261011}"></script>
 </body>
 </html>

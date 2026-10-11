@@ -1,0 +1,35 @@
+{
+  "project": "BJYO",
+  "branch": "codex/login-slider-captcha",
+  "baseCommit": "b978f8d7",
+  "change": "登录改为与 codex-reset-sys 一致的滑块拼图安全验证，接入 Shiro 会话校验",
+  "verification": {
+    "backendTests": 13,
+    "frontendTests": 9,
+    "browserChecks": 9,
+    "fullMavenReactor": "BUILD SUCCESS",
+    "independentReview": "通过，已修复旧请求干扰和会话快照恢复后的凭证重用"
+  },
+  "securityBehavior": [
+    "挑战和凭证按 UUID 隔离，绑定会话，120秒有效",
+    "位置验证与登录凭证均只能使用一次",
+    "Shiro 会话持久化不保存验证码状态，恢复会话必须重新验证",
+    "服务器不返回目标横坐标",
+    "每个会话最多保留8个挑战和8个凭证"
+  ],
+  "verificationScope": "浏览器使用本地测试接口和真实生成的拼图图片；后端覆盖服务、登录过滤器与实际 Shiro 会话序列化/恢复逻辑；未使用真实账号连接数据库登录。",
+  "productionDeployed": false,
+  "mergedToMaster": false,
+  "databaseMigration": false,
+  "commands": [
+    "mvn test -Dslider.fixture=/tmp/bjyo-slider-fixture.json",
+    "mvn -o test",
+    "node --test tests/ui/*.test.cjs",
+    "NODE_PATH=<Playwright模块目录> <Node20或更高版本> tests/ui/slider-browser.cjs"
+  ],
+  "finalTestNote": "最后补强会话恢复测试的等待时间后，重新编译并用 JUnitCore 运行两套测试，13项通过。",
+  "previews": [
+    "desktop.png",
+    "mobile.png"
+  ]
+}

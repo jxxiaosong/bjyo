@@ -25,6 +25,7 @@ import com.bjyo.common.utils.StringUtils;
 import com.bjyo.common.utils.security.CipherUtils;
 import com.bjyo.common.utils.spring.SpringUtils;
 import com.bjyo.framework.config.properties.PermitAllUrlProperties;
+import com.bjyo.framework.web.service.SliderCaptchaService;
 import com.bjyo.framework.shiro.realm.UserRealm;
 import com.bjyo.framework.shiro.rememberMe.CustomCookieRememberMeManager;
 import com.bjyo.framework.shiro.session.OnlineSessionDAO;
@@ -49,6 +50,9 @@ import jakarta.servlet.Filter;
 @Configuration
 public class ShiroConfig
 {
+    @Autowired
+    private SliderCaptchaService sliderCaptchaService;
+
     /**
      * Session超时时间，单位为毫秒（默认30分钟）
      */
@@ -317,6 +321,8 @@ public class ShiroConfig
         filterChainDefinitionMap.put("/js/**", "anon");
         filterChainDefinitionMap.put("/bjyo/**", "anon");
         filterChainDefinitionMap.put("/captcha/captchaImage**", "anon");
+        filterChainDefinitionMap.put("/captcha/slider", "anon");
+        filterChainDefinitionMap.put("/captcha/slider/verify", "anon");
         // 匿名访问不鉴权注解列表
         permitAllUrl.getUrls().forEach(url -> filterChainDefinitionMap.put(url, "anon"));
         // 退出 logout地址，shiro去清除session
@@ -374,6 +380,7 @@ public class ShiroConfig
         CaptchaValidateFilter captchaValidateFilter = new CaptchaValidateFilter();
         captchaValidateFilter.setCaptchaEnabled(captchaEnabled);
         captchaValidateFilter.setCaptchaType(captchaType);
+        captchaValidateFilter.setSliderCaptchaService(sliderCaptchaService);
         return captchaValidateFilter;
     }
 

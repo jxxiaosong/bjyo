@@ -1,5 +1,7 @@
 package com.bjyo.framework.shiro.web.filter.captcha;
 
+import com.bjyo.framework.web.service.SliderCaptchaService;
+import org.apache.shiro.web.util.WebUtils;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,6 +22,13 @@ public class CaptchaValidateFilter extends AccessControlFilter
      * 是否开启验证码
      */
     private boolean captchaEnabled = true;
+
+    private SliderCaptchaService sliderCaptchaService;
+
+    public void setSliderCaptchaService(SliderCaptchaService service)
+    {
+        this.sliderCaptchaService = service;
+    }
 
     /**
      * 验证码类型
@@ -53,6 +62,11 @@ public class CaptchaValidateFilter extends AccessControlFilter
         if (captchaEnabled == false || !"post".equals(httpServletRequest.getMethod().toLowerCase()))
         {
             return true;
+        }
+        if ("/login".equals(WebUtils.getPathWithinApplication(httpServletRequest)))
+        {
+            return sliderCaptchaService != null && sliderCaptchaService.consume(httpServletRequest.getSession(false),
+                    httpServletRequest.getParameter("uuid"), httpServletRequest.getParameter(ShiroConstants.CURRENT_VALIDATECODE));
         }
         return validateResponse(httpServletRequest, httpServletRequest.getParameter(ShiroConstants.CURRENT_VALIDATECODE));
     }
